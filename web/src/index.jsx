@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Decider from './decider'
 
 ReactDOM.render(
-    <div />
+    <Decider />,
     document.querySelector('#app')
 )
