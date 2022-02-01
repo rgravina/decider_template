@@ -7,8 +7,18 @@ describe("play game", () => {
         const container = document.createElement("div")
         document.body.appendChild(container)
 
-        const app = render(<Decider />, container)
+        const alwaysInputInvalid = {
+            play(p1, p2, observer) {
+                observer.invalidInput()
+            }
+        }
 
-        expect(app).not.toBeNull()
+        const app = render(<Decider requests={alwaysInputInvalid} />, container)
+
+        document.querySelector("button").click()
+
+        const page = container.textContent
+
+        expect(page).toContain("INVALID!")
     })
 })
