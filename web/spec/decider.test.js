@@ -25,9 +25,15 @@ const submit = () => {
     document.querySelector("button").click()
 }
 
-const alwaysInputInvalid = {
+const alwaysInputInvalidStub = {
     play(p1, p2, observer) {
         observer.invalidInput()
+    }
+}
+
+const alwaysTieStub = {
+    play(p1, p2, observer) {
+        observer.tie()
     }
 }
 
@@ -40,16 +46,33 @@ describe("play game", () => {
         teardown()
     })
 
-    it("on render does not display error message", () => {
-        renderApp(alwaysInputInvalid)
-
-        expect(getContent()).not.toContain("INVALID!")
+    describe("invalid Input", () => {
+        it("on render does not display error message", () => {
+            renderApp(alwaysInputInvalidStub)
+    
+            expect(getContent()).not.toContain("INVALID!")
+        })
+        it("display app", () => {
+            renderApp(alwaysInputInvalidStub)
+    
+            submit()
+    
+            expect(getContent()).toContain("INVALID!")
+        })
     })
-    it("display app", () => {
-        renderApp(alwaysInputInvalid)
 
-        submit()
-
-        expect(getContent()).toContain("INVALID!")
+    describe("tie", () => {
+        it("on render does not display tie message", () => {
+            renderApp(alwaysTieStub)
+    
+            expect(getContent()).not.toContain("TIE!")
+        })
+        it("display app", () => {
+            renderApp(alwaysTieStub)
+    
+            submit()
+    
+            expect(getContent()).toContain("TIE!")
+        })
     })
 })
