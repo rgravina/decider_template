@@ -1,11 +1,20 @@
 import React from 'react'
 
 export default class Decider extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            result: ""
+        }
+    }
+
     render () {
         return (
             <div>
-                <p>INVALID!</p>
-                <button>PLAY</button>
+                <p>{this.state.result}</p>
+                <button onClick={() => {
+                    this.setState({result: "INVALID!"})
+                }}>PLAY</button>
             </div>
         )
     }
