@@ -9,7 +9,15 @@ export default class Decider extends React.Component {
     }
 
     submit() {
+        this.props.requests.play("", "", this)
+    }
+
+    invalidInput() {
         this.setState({result: "INVALID!"})
+    }
+
+    tie() {
+        this.setState({result: "TIE!"})
     }
 
     render () {
