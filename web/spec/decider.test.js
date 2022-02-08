@@ -43,6 +43,12 @@ const alwaysP1WinsStub = {
     }
 }
 
+const alwaysP2WinsStub = {
+    play(p1, p2, observer) {
+        observer.p2Wins()
+    }
+}
+
 describe("play game", () => {
     beforeEach(() => {
         setupDOM()
@@ -83,7 +89,7 @@ describe("play game", () => {
     })
 
     describe("p1 wins", () => {
-        it("on render does not display tie message", () => {
+        it("on render does not display p1 wins message", () => {
             renderApp(alwaysP1WinsStub)
     
             expect(getContent()).not.toContain("Player 1 Wins!")
@@ -94,6 +100,21 @@ describe("play game", () => {
             submit()
     
             expect(getContent()).toContain("Player 1 Wins!")
+        })
+    })
+
+    describe("p2 wins", () => {
+        it("on render does not display p2 wins message", () => {
+            renderApp(alwaysP2WinsStub)
+    
+            expect(getContent()).not.toContain("Player 2 Wins!")
+        })
+        it("display app", () => {
+            renderApp(alwaysP2WinsStub)
+    
+            submit()
+    
+            expect(getContent()).toContain("Player 2 Wins!")
         })
     })
 })
