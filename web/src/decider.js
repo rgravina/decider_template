@@ -20,6 +20,10 @@ export default class Decider extends React.Component {
         this.setState({result: "TIE!"})
     }
 
+    p1Wins() {
+        this.setState({result: "Player 1 Wins!"})
+    }
+
     render () {
         return (
             <div>
