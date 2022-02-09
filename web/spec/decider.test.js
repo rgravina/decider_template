@@ -26,6 +26,12 @@ const submit = () => {
     document.querySelector("button").click()
 }
 
+const enterTextIntoInput = (name, value) => {
+    const target = document.querySelector(`[name=${name}]`)
+    target.value = value
+    ReactTestUtils.Simulate.change(target)
+}
+
 const alwaysInputInvalidStub = {
     play(p1, p2, observer) {
         observer.invalidInput()
@@ -126,14 +132,10 @@ describe("play game", () => {
             renderApp(requestSpy)
 
             // input player 1 throw
-            const p1 = document.querySelector('[name="p1"]')
-            p1.value = 'rock'
-            ReactTestUtils.Simulate.change(p1)
+            enterTextIntoInput('p1', 'rock')
             
             // input player 2 throw
-            const p2 = document.querySelector('[name="p2"]')
-            p2.value = 'scissors'
-            ReactTestUtils.Simulate.change(p2)
+            enterTextIntoInput('p2', 'scissors')
 
             // submit the form
             submit()
