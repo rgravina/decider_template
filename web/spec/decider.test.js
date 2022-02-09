@@ -1,6 +1,7 @@
 import {render} from 'react-dom'
 import React from 'react'
 import Decider from '../src/decider'
+import ReactTestUtils from 'react-dom/test-utils'
 
 let container
 
@@ -115,6 +116,30 @@ describe("play game", () => {
             submit()
     
             expect(getContent()).toContain("Player 2 Wins!")
+        })
+    })
+
+    describe("submitting game", () => {
+        it("sends the users input to the game module", () => {
+            const requestSpy = {play: jest.fn()}
+
+            renderApp(requestSpy)
+
+            // input player 1 throw
+            const p1 = document.querySelector('[name="p1"]')
+            p1.value = 'rock'
+            ReactTestUtils.Simulate.change(p1)
+            
+            // input player 2 throw
+            const p2 = document.querySelector('[name="p2"]')
+            p2.value = 'scissors'
+            ReactTestUtils.Simulate.change(p2)
+
+            // submit the form
+            submit()
+
+            // verify that the game module recieved inputs
+            expect(requestSpy.play).toHaveBeenCalledWith("rock", "scissors", expect.anything())
         })
     })
 })
